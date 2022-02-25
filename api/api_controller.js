@@ -122,13 +122,10 @@ function getActive(array, findArray, flag) {
     var change_array = [];
     var active_array = [false, false, false, false, false, false, false, false, false];
     array.forEach((s, i) => { change_array[i] = s % 13 });
-    console.log("all", change_array);
-    console.log("find", findArray);
 
     findArray.forEach((a) => {
         change_array.forEach((b, j) => {
             if (a == b) {
-                console.log(j);
                 if (flag == "user") {
                     if (j >= 0 && j <= 1)
                         active_array[j] = true;
@@ -186,17 +183,12 @@ function ResultCheck(user, middle, bort, all) {
         gameResult = "bort";
         active_array = getActive(bortAllArray, maxCaseResultArray2[0].caseNum, gameResult);
     } else {
-        console.log("!!!!!!!!!!!!!!!!!!");
-        console.log(maxScore1);
         if (maxScore1 == 0) {
             var usercards = [];
             user.forEach((s, i) => { usercards[i] = s % 13 });
             var bortcards = [];
             bort.forEach((s, i) => { bortcards[i] = s % 13 });
-            console.log("usercards", usercards);
-            console.log("bortcards", bortcards);
             var deci = sizeDecision(usercards, bortcards);
-            console.log(deci);
             if (deci == "first") {
                 gameResult = "user";
                 active_array = getActive(userAllArray, maxCaseResultArray1[0].caseNum, gameResult);
@@ -212,8 +204,6 @@ function ResultCheck(user, middle, bort, all) {
             user.forEach((s, i) => { usercards[i] = s % 13 });
             var bortcards = [];
             bort.forEach((s, i) => { bortcards[i] = s % 13 });
-            console.log("usercards", usercards);
-            console.log("bortcards", bortcards);
             var decision = sizeDecision(usercards, bortcards);
             if (decision.result == "first") {
                 gameResult = "user";
@@ -228,7 +218,6 @@ function ResultCheck(user, middle, bort, all) {
         }
     }
 
-    console.log("active_array", active_array);
     var result = {
         gameResult: gameResult,
         active_array: active_array
@@ -242,7 +231,6 @@ module.exports = {
         const { userName, token } = req.body;
         try {
             var cardOrder = getArray(52, 52);
-            console.log(cardOrder);
             user[token] = {
                 cardArray: cardOrder,
                 userName: userName,
